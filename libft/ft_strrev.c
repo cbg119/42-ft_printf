@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 23:30:18 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/28 00:57:03 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 14:00:41 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_swap(char *a, char *b)
 	*b = c;
 }
 
-void	ft_strrev(char *str)
+void			ft_strrev(char *str)
 {
 	char	*pointer;
 

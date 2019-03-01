@@ -5,35 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 21:12:04 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/28 22:05:47 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/01 13:42:10 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/01 13:53:29 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-static unsigned long long       fetch_number(int length, va_list ap)
-{
-    uint64_t        n;
-
-    if (length == 'h' + 'h')
-    {
-        n = va_arg(ap, unsigned int);
-        return ((unsigned char)n);
-    }
-    else if (length == 'h')
-    {
-        n = va_arg(ap, unsigned int);
-        return ((unsigned short)n);
-    }
-    else if (length == 'l')
-        n = va_arg(ap, unsigned long);
-    else if (length == 'l' + 'l')
-        n = va_arg(ap, unsigned long long);
-    else
-        n = va_arg(ap, unsigned int);
-    return (n);
-}
 
 static char						*c_u(unsigned long long num, t_opts options)
 {

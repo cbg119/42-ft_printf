@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 22:08:39 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 00:13:02 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 13:53:45 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,13 @@
 
 #include "../includes/ft_printf.h"
 
-static unsigned long long		fetch_number(int length, va_list ap)
-{
-	unsigned long long		n;
-
-	if (length == 'h' + 'h')
-	{
-		n = va_arg(ap, unsigned int);
-		return ((unsigned char)n);
-	}
-	else if (length == 'h')
-	{
-		n = va_arg(ap, unsigned int);
-		return ((unsigned short)n);
-	}
-	else if (length == 'l')
-		n = va_arg(ap, unsigned long);
-	else if (length == 'l' + 'l')
-		n = va_arg(ap, unsigned long long);
-	else
-		n = va_arg(ap, unsigned int);
-	return (n);
-}
-
 static char						*make_hex(unsigned long long number)
 {
-	int		size;
-	unsigned long long temp;
-	int		i;
-	char	*result;
-	char	*hex_string;
+	int					size;
+	unsigned long long	temp;
+	int					i;
+	char				*result;
+	char				*hex_string;
 
 	i = 0;
 	size = 0;
@@ -57,8 +34,6 @@ static char						*make_hex(unsigned long long number)
 		size++;
 	MEM_CHK((result = (char *)malloc(sizeof(char) * size + 1)));
 	hex_string = "0123456789abcdef";
-	if (!number)
-		result[i] = '0';
 	while (number)
 	{
 		result[i] = hex_string[number % 16];

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_X.c                                        :+:      :+:    :+:   */
+/*   convert_xl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 23:00:53 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 00:13:28 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/01 13:44:52 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/01 13:54:03 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,23 @@
 
 #include "../includes/ft_printf.h"
 
-static unsigned long long		fetch_number(int length, va_list ap)
-{
-	unsigned long long n;
-
-	if (length == 'h' + 'h')
-	{
-		n = va_arg(ap, unsigned int);
-		return ((unsigned char)n);
-	}
-	else if (length == 'h')
-	{
-		n = va_arg(ap, unsigned int);
-		return ((unsigned short)n);
-	}
-	else if (length == 'l')
-		n = va_arg(ap, unsigned long);
-	else if (length == 'l' + 'l')
-		n = va_arg(ap, unsigned long long);
-	else
-		n = va_arg(ap, unsigned int);
-	return (n);
-}
-
 static char						*make_hex(unsigned long long number)
 {
-	int		size;
+	int						size;
 	unsigned long long		temp;
-	int		i;
-	char	*result;
-	char	*hex_string;
+	int						i;
+	char					*result;
+	char					*hex_string;
 
 	i = 0;
 	size = 0;
 	if (!number)
-		return(ft_strdup("0"));
+		return (ft_strdup("0"));
 	temp = number;
 	while (temp /= 16)
 		size++;
 	MEM_CHK((result = (char *)malloc(sizeof(char) * size + 1)));
 	hex_string = "0123456789ABCDEF";
-	if (!number)
-		result[i] = '0';
 	while (number)
 	{
 		result[i] = hex_string[number % 16];
@@ -108,7 +83,7 @@ static void						zero_pad(char *str)
 		str[i++] = '0';
 }
 
-int								convert_X(t_opts options, va_list ap)
+int								convert_xl(t_opts options, va_list ap)
 {
 	unsigned long long	number;
 	char				*result;

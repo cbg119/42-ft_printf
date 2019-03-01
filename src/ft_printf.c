@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 13:05:07 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 13:02:15 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 14:18:34 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int		dispatch_flagged(char **str, va_list ap)
 	}
 	else if (**str == 'X')
 	{
-		count = convert_X(options, ap);
+		count = convert_xl(options, ap);
 		(*str)++;
 	}
 	else if (**str == '%')
@@ -100,10 +100,4 @@ int		ft_printf(char *str, ...)
 	}
 	va_end(ap);
 	return (count);
-}
-
-int		main(void)
-{
-	ft_printf("%x\n", 0);
-	printf("%x\n\n", 0);
 }

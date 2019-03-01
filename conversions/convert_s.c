@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 16:47:12 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/28 22:03:30 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 13:58:29 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,8 @@ int		convert_s(t_opts options, va_list ap)
 		return (6);
 	}
 	length = ft_strlen(string);
-	if (options.precision >= 0)
-	{
-		if (options.precision)
-			length = options.precision;
-	}
-	new_string = ft_strndup(string, length);
+	new_string = ft_strndup(string,
+			(options.precision < length) ? options.precision : length);
 	new_string = ft_pad(new_string, options.field_width,
 			ft_strlen(new_string), options.flags.minus);
 	if (options.precision == -1 && options.flags.zero)

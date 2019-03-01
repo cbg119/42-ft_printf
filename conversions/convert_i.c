@@ -6,13 +6,13 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 00:54:55 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/27 00:32:12 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 13:37:59 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int64_t		fetch_number(int length, va_list ap)
+static int64_t		fetch_numberi(int length, va_list ap)
 {
 	int64_t		n;
 
@@ -86,7 +86,7 @@ int					convert_i(t_opts options, va_list ap)
 	int64_t		number;
 
 	count = 0;
-	number = fetch_number(options.length, ap);
+	number = fetch_numberi(options.length, ap);
 	result = convert_i_precision(number, options);
 	result = convert_i_fieldwidth(result, options);
 	if (options.precision == -1 && options.flags.zero && !options.flags.minus)
