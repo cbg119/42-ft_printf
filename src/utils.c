@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 20:37:01 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 13:36:46 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/01 14:27:30 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/01 14:30:36 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,23 @@ void					add_flag(t_flags *flags, char c)
 
 unsigned long long		fetch_number(int length, va_list ap)
 {
-    unsigned long long n;
+	unsigned long long		n;
 
-    if (length == 'h' + 'h')
-    {
-        n = va_arg(ap, unsigned int);
-        return ((unsigned char)n);
-    }
-    else if (length == 'h')
-    {
-        n = va_arg(ap, unsigned int);
-        return ((unsigned short)n);
-    }
-    else if (length == 'l')
-        n = va_arg(ap, unsigned long);
-    else if (length == 'l' + 'l')
-        n = va_arg(ap, unsigned long long);
-    else
-        n = va_arg(ap, unsigned int);
-    return (n);
+	if (length == 'h' + 'h')
+	{
+		n = va_arg(ap, unsigned int);
+		return ((unsigned char)n);
+	}
+	else if (length == 'h')
+	{
+		n = va_arg(ap, unsigned int);
+		return ((unsigned short)n);
+	}
+	else if (length == 'l')
+		n = va_arg(ap, unsigned long);
+	else if (length == 'l' + 'l')
+		n = va_arg(ap, unsigned long long);
+	else
+		n = va_arg(ap, unsigned int);
+	return (n);
 }

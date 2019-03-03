@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 23:50:06 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 13:53:10 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/02 13:49:16 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char						*c_o(unsigned long long num, t_opts options)
 
 	result = NULL;
 	octal = make_octal(num);
+	if (!num && options.precision != 0)
+		return (ft_strdup("0"));
 	if (*octal == '0' && options.precision == 0)
 		return (ft_strdup(""));
 	if (options.flags.pound == 1)

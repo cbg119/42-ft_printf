@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 20:35:02 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/27 22:52:35 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 18:50:25 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int			get_precision(char **str, va_list ap)
 	precision = -1;
 	if (**str == '.')
 	{
+		precision = 0;
 		(*str)++;
 		if (IS_DIGIT(**str))
 		{
@@ -93,7 +94,7 @@ static int			get_length(char **str)
 	return (length);
 }
 
-t_opts		get_options(char **str, va_list ap)
+t_opts				get_options(char **str, va_list ap)
 {
 	t_opts		options;
 

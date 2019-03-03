@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 13:05:07 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 14:18:34 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/01 14:31:33 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int		dispatch_flagged(char **str, va_list ap)
 	return (count);
 }
 
-int		ft_printf(char *str, ...)
+int				ft_printf(char *str, ...)
 {
 	int			count;
 	va_list		ap;

@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 00:54:55 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 13:37:59 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/02 22:13:31 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,29 @@ static int64_t		fetch_numberi(int length, va_list ap)
 	return (n);
 }
 
-static char			*convert_i_precision(int64_t number, t_opts options)
+static char			*convert_i_precision(long long number, t_opts options)
 {
-	char		*result;
-	int			len;
-	int			negative;
+	int					len;
+	char				*result;
+	int					negative;
+	unsigned long long	num;
 
 	negative = 0;
 	if (number == 0 && options.precision == 0)
 		return (ft_strdup(""));
+	num = (number < 0) ? -number : number;
 	if (number < 0)
-	{
-		len = ft_numlen(number * -1);
-		negative = 1;
-	}
-	else
-		len = ft_numlen(number);
+		negative++;
+	len = ft_numlen(num);
 	if (options.precision > len)
 	{
-		len = options.precision;
-		result = ft_strnew(len + negative);
-		ft_memset(result, '0', len + negative);
-		result = ft_intmove(result, len + negative, number);
+		result = ft_strnew(options.precision + negative);
+		ft_memset(result, '0', options.precision + negative);
+		ft_intmove(result, options.precision + negative, num, negative);
 		return (result);
 	}
 	result = ft_strnew(len + negative);
-	ft_intmove(result, len + negative, number);
+	ft_intmove(result, len + negative, num, negative);
 	return (result);
 }
 
@@ -98,8 +95,11 @@ int					convert_i(t_opts options, va_list ap)
 	}
 	if (options.flags.plus == 1)
 	{
-		(number >= 0) ? ft_putchar('+') : ft_putchar('-');
-		count++;
+		if (number >= 0)
+		{
+			ft_putchar('+');
+			count++;
+		}
 	}
 	ft_putstr(result);
 	return (count + ft_strlen(result));

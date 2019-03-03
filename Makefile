@@ -6,7 +6,7 @@
 #    By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/23 18:04:52 by cbagdon           #+#    #+#              #
-#    Updated: 2019/03/01 14:17:52 by cbagdon          ###   ########.fr        #
+#    Updated: 2019/03/01 17:43:53 by cbagdon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,5 +121,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf test
 
 re: fclean all

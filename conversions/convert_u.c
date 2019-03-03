@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:42:10 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 13:53:29 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/02 22:09:09 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char						*c_u(unsigned long long num, t_opts options)
 		len = options.precision;
 		result = ft_strnew(len);
 		ft_memset(result, '0', len);
-		result = ft_intmove(result, len, num);
+		ft_intmove(result, len, num, 0);
 		return (result);
 	}
 	result = ft_itoa(num);
