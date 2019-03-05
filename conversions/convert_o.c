@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 23:50:06 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/05 01:30:11 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/05 02:09:44 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static void						zero_pad(char *str)
 
 int								convert_o(t_opts options, va_list ap)
 {
+	int					to_return;
 	unsigned long long	number;
 	char				*result;
 	char				*octal;
@@ -92,7 +93,8 @@ int								convert_o(t_opts options, va_list ap)
 	if (options.flags.zero == 1 && options.flags.minus == 0)
 		zero_pad(result);
 	ft_putstr(result);
-	if (octal && !octal)
-		free(octal);
-	return (ft_strlen(result));
+	to_return = ft_strlen(result);
+	if (result)
+		ft_strdel(&result);
+	return (to_return);
 }

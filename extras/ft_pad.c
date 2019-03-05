@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:01:41 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 19:55:06 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/05 02:08:29 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ char	*ft_pad(char *s, int pad, int length, int left_align)
 		ft_strmove(new, s);
 	else
 		ft_stroverlap(new, s);
-	ft_memdel((void **)&s);
+	ft_strdel(&s);
 	return (new);
 }
