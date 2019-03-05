@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 23:50:06 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/02 13:49:16 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/05 01:30:11 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,14 @@ static char						*make_octal(unsigned long long number)
 	return (result);
 }
 
-static char						*c_o(unsigned long long num, t_opts options)
+static char						*c_o(unsigned long long num, t_opts options,
+		char *octal)
 {
 	char	*new;
 	char	*result;
-	char	*octal;
 	int		len;
 
 	result = NULL;
-	octal = make_octal(num);
 	if (!num && options.precision != 0)
 		return (ft_strdup("0"));
 	if (*octal == '0' && options.precision == 0)
@@ -83,13 +82,17 @@ int								convert_o(t_opts options, va_list ap)
 {
 	unsigned long long	number;
 	char				*result;
+	char				*octal;
 
 	number = fetch_number(options.length, ap);
-	result = c_o(number, options);
+	octal = make_octal(number);
+	result = c_o(number, options, octal);
 	result = ft_pad(result, options.field_width,
 			ft_strlen(result), options.flags.minus);
 	if (options.flags.zero == 1 && options.flags.minus == 0)
 		zero_pad(result);
 	ft_putstr(result);
+	if (octal && !octal)
+		free(octal);
 	return (ft_strlen(result));
 }

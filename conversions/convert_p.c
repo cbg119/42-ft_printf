@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 23:14:58 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/28 01:20:00 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/03 15:08:40 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int				convert_p(t_opts options, va_list ap)
 	to_print = make_hex(number);
 	to_print = ft_pad(to_print, options.field_width, 14, options.flags.minus);
 	ft_putstr(to_print);
-	return (ft_strlen(to_print));
+	number = ft_strlen(to_print);
+	free(to_print);
+	return ((int)number);
 }

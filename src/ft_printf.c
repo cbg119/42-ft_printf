@@ -6,12 +6,10 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 13:05:07 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 14:31:33 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/05 01:27:05 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include <stdio.h>
 #include "../includes/ft_printf.h"
 
 static void		dispatch_normal(char **str)
@@ -20,52 +18,17 @@ static void		dispatch_normal(char **str)
 	(*str)++;
 }
 
-static int		dispatch_flagged(char **str, va_list ap)
+static int		dispatch_flagged(char **str, va_list ap, int count)
 {
-	int		count;
+	int		i;
 	t_opts	options;
 
 	(*str)++;
-	count = 0;
 	options = get_options(str, ap);
-	if (**str == 's')
+	i = -1;
+	if (**str == 'i' || **str == 'd')
 	{
-		count = convert_s(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'i' || **str == 'd')
-	{
-		count = convert_i(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'c')
-	{
-		count = convert_c(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'p')
-	{
-		count = convert_p(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'o')
-	{
-		count = convert_o(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'u')
-	{
-		count = convert_u(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'x')
-	{
-		count = convert_x(options, ap);
-		(*str)++;
-	}
-	else if (**str == 'X')
-	{
-		count = convert_xl(options, ap);
+		count = convert_i(options, ap, 0, 0);
 		(*str)++;
 	}
 	else if (**str == '%')
@@ -75,8 +38,10 @@ static int		dispatch_flagged(char **str, va_list ap)
 	}
 	else
 	{
-		count++;
-		ft_putchar(**str);
+		while (++i < CONVERSION_NUMBER)
+			if (**str == g_table[i].key)
+				count = g_table[i].convert(options, ap);
+		(*str)++;
 	}
 	return (count);
 }
@@ -96,7 +61,7 @@ int				ft_printf(char *str, ...)
 			count++;
 		}
 		else
-			count += dispatch_flagged(&str, ap);
+			count += dispatch_flagged(&str, ap, 0);
 	}
 	va_end(ap);
 	return (count);

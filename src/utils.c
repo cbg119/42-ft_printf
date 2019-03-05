@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:27:30 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 14:30:36 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/03 13:37:24 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ unsigned long long		fetch_number(int length, va_list ap)
 	else if (length == 'l' + 'l')
 		n = va_arg(ap, unsigned long long);
 	else
+	{
 		n = va_arg(ap, unsigned int);
+		return ((unsigned int)n);
+	}
 	return (n);
 }

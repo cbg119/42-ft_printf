@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dispatch_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 21:27:38 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/02 21:28:25 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/05 00:30:19 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/05 01:07:36 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int		main(void)
+const t_dispatch	g_table[] =
 {
-	ft_printf("%d\n", -42);
-	return (0);
-}
+	{'s', &convert_s},
+	{'c', &convert_c},
+	{'p', &convert_p},
+	{'o', &convert_o},
+	{'u', &convert_u},
+	{'x', &convert_x},
+	{'X', &convert_xl},
+	{'f', &convert_f}
+};

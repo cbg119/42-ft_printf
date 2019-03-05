@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/01 19:01:19 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/01 19:11:11 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/03 15:12:32 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/04 23:29:35 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "../includes/ft_printf.h"
 
-static char						*make_hex(unsigned long long number)
+static char		*make_hex(unsigned long long number)
 {
 	int					size;
 	unsigned long long	temp;
@@ -44,56 +44,75 @@ static char						*make_hex(unsigned long long number)
 	return (result);
 }
 
-static char						*c_xl(unsigned long long num, t_opts options)
+static void		precision_xl(char *hex, t_opts options)
 {
-	char	*new;
-	char	*result;
-	char	*hex;
 	int		len;
+	char	*result;
 
 	result = NULL;
-	hex = make_hex(num);
+	len = ft_strlen(hex);
 	if (*hex == '0' && options.precision == 0)
-		return (ft_strdup(""));
-	if (options.flags.pound == 1 && num != 0)
-		new = ft_strjoin("0X", hex);
-	else
-		new = hex;
-	len = ft_strlen(new);
+	{
+		free(hex);
+		hex = ft_strdup("");
+		return ;
+	}
 	if (options.precision > len)
 	{
-		len = options.precision;
-		result = ft_strnew(len);
-		ft_memset(result, '0', len);
-		result = ft_stroverlap(result, new);
-		return (result);
+		result = ft_strnew(options.precision);
+		ft_memset(result, '0', options.precision);
+		ft_stroverlap(result, hex);
+		free(hex);
+		hex = result;
 	}
-	return (new);
 }
 
-static void						zero_pad(char *str)
+static int		width_xl(char *str, t_opts options,
+		unsigned long long number, char *to_print)
 {
-	int		i;
+	int		len;
+	int		to_apply;
 
-	i = 0;
-	while (str[i] == ' ')
-		str[i++] = '0';
+	to_apply = 0;
+	*to_print = (options.flags.zero &&
+			(options.precision == -1 && !options.flags.minus)) ? '0' : ' ';
+	len = ft_strlen(str);
+	if (options.flags.pound && number)
+		options.field_width -= 2;
+	if (options.field_width > len)
+		to_apply += (options.field_width - len);
+	return (to_apply);
 }
 
-int								convert_xl(t_opts options, va_list ap)
+static void		print_alternate(int *len)
 {
+	ft_putstr("0X");
+	*len += 2;
+}
+
+int				convert_xl(t_opts options, va_list ap)
+{
+	char				width_c;
+	int					spaces;
 	int					len;
 	unsigned long long	number;
 	char				*result;
 
+	len = 0;
 	number = fetch_number(options.length, ap);
-	result = c_xl(number, options);
-	result = ft_pad(result, options.field_width,
-			ft_strlen(result), options.flags.minus);
-	if (options.flags.zero == 1 && options.flags.minus == 0)
-		zero_pad(result);
+	result = make_hex(number);
+	precision_xl(result, options);
+	spaces = width_xl(result, options, number, &width_c);
+	if (!options.flags.minus && !options.flags.zero)
+		ft_imsorry(width_c, &len, spaces);
+	if (options.flags.pound && number)
+		print_alternate(&len);
+	if (!options.flags.minus && options.flags.zero)
+		ft_imsorry(width_c, &len, spaces);
 	ft_putstr(result);
-	len = ft_strlen(result);
+	if (options.flags.minus)
+		ft_imsorry(width_c, &len, spaces);
+	len += ft_strlen(result);
 	free(result);
 	return (len);
 }

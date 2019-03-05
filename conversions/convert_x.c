@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 22:08:39 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/02 20:42:29 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/05 01:21:49 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,10 @@ static int		width_x(char *str, t_opts options,
 	return (to_apply);
 }
 
-static void		ft_imsorry(char to_print, int *len, int spaces)
+static void		print_alternate(int *len)
 {
-	while (spaces-- > 0)
-	{
-		ft_putchar(to_print);
-		*len += 1;
-	}
+	ft_putstr("0x");
+	*len += 2;
 }
 
 int				convert_x(t_opts options, va_list ap)
@@ -109,15 +106,13 @@ int				convert_x(t_opts options, va_list ap)
 	if (!options.flags.minus && !options.flags.zero)
 		ft_imsorry(width_c, &len, spaces);
 	if (options.flags.pound && number)
-	{
-		ft_putstr("0x");
-		len += 2;
-	}
+		print_alternate(&len);
 	if (!options.flags.minus && options.flags.zero)
 		ft_imsorry(width_c, &len, spaces);
 	ft_putstr(result);
 	if (options.flags.minus)
 		ft_imsorry(width_c, &len, spaces);
 	len += ft_strlen(result);
+	free(result);
 	return (len);
 }

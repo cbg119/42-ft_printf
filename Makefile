@@ -6,7 +6,7 @@
 #    By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/23 18:04:52 by cbagdon           #+#    #+#              #
-#    Updated: 2019/03/01 17:43:53 by cbagdon          ###   ########.fr        #
+#    Updated: 2019/03/05 01:13:22 by cbagdon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = libftprintf.a
 
 EXTRA_SRCS = ft_intmove.c \
 			 ft_pad.c \
-			 ft_numlen.c
+			 ft_numlen.c \
+			 ft_imsorry.c \
+			 pf_putfloat.c
 
 CONVERSION_SRCS = convert_s.c \
 				  convert_i.c \
@@ -24,12 +26,14 @@ CONVERSION_SRCS = convert_s.c \
 				  convert_u.c \
 				  convert_x.c \
 				  convert_xl.c \
+				  convert_f.c \
 				  convert_percent.c
 
 SRCS = ft_printf.c \
 	   decision.c \
 	   options.c \
-	   utils.c
+	   utils.c \
+	   dispatch_array.c
 
 LIBFT_SRCS = ft_strcpy.c \
        ft_strdup.c \
@@ -99,11 +103,9 @@ LIBFT_SRCS = ft_strcpy.c \
        ft_strndup.c \
        ft_stroverlap.c \
        ft_strmove.c \
-       ft_strrev.c
+       ft_strrev.c \
 
-INCLUDES = includes/ft_printf.h \
-		   includes/libft.h \
-		   includes/get_next_line.h
+INCLUDES = includes/
 
 OBJECTS = $(patsubst %.c,%.o,$(SRCS))
 OBJECTS += $(patsubst %.c,%.o,$(CONVERSION_SRCS))
@@ -113,7 +115,7 @@ OBJECTS += $(patsubst %.c,%.o,$(LIBFT_SRCS))
 all: $(NAME)
 
 $(NAME):
-	gcc -g -Wall -Wextra -Werror -c $(addprefix src/,$(SRCS)) $(addprefix extras/,$(EXTRA_SRCS)) $(addprefix conversions/,$(CONVERSION_SRCS)) $(addprefix libft/,$(LIBFT_SRCS)) -I $(INCLUDES)
+	gcc -Wall -Wextra -Werror -c $(addprefix src/,$(SRCS)) $(addprefix extras/,$(EXTRA_SRCS)) $(addprefix conversions/,$(CONVERSION_SRCS)) $(addprefix libft/,$(LIBFT_SRCS)) -I $(INCLUDES)
 	ar -rcs $(NAME) $(OBJECTS)
 
 clean:
@@ -121,6 +123,5 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf test
 
 re: fclean all

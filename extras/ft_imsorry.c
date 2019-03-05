@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numlen.c                                        :+:      :+:    :+:   */
+/*   ft_imsorry.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/26 23:02:32 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/03 14:11:03 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/03/03 13:13:23 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/03/03 13:21:58 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_numlen(unsigned long long num)
+void	ft_imsorry(char to_print, int *len, int spaces)
 {
-	int					i;
-
-	if (num == 0)
-		return (1);
-	i = 0;
-	while (num > 0)
+	while (spaces-- > 0)
 	{
-		i++;
-		num /= 10;
+		ft_putchar(to_print);
+		*len += 1;
 	}
-	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:42:10 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/03/02 22:09:09 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/03/03 15:09:47 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static char						*c_u(unsigned long long num, t_opts options)
 		ft_intmove(result, len, num, 0);
 		return (result);
 	}
-	result = ft_itoa(num);
+	result = ft_strnew(len);
+	ft_intmove(result, len, num, 0);
 	return (result);
 }
 
@@ -55,5 +56,7 @@ int								convert_u(t_opts options, va_list ap)
 	if (options.flags.zero == 1 && options.flags.minus == 0)
 		zero_pad(result);
 	ft_putstr(result);
-	return (ft_strlen(result));
+	number = ft_strlen(result);
+	free(result);
+	return ((int)number);
 }
